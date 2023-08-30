@@ -66,6 +66,7 @@ endif
 #             Deploy the headers that can be exposed
 #===============================================================================
 
+ifeq ($(BUILD_BROKEN_USES_BUILD_COPY_HEADERS),true)
 LOCAL_COPY_HEADERS_TO   := mm-core/omxcore
 LOCAL_COPY_HEADERS      := inc/OMX_Audio.h
 LOCAL_COPY_HEADERS      += inc/OMX_Component.h
@@ -94,6 +95,7 @@ LOCAL_COPY_HEADERS      += inc/OMX_VideoExt.h
 LOCAL_COPY_HEADERS      += inc/QOMX_StreamingExtensions.h
 LOCAL_COPY_HEADERS      += inc/QCMediaDefs.h
 LOCAL_COPY_HEADERS      += inc/QCMetaData.h
+endif
 
 #===============================================================================
 #             LIBRARY for Android apps

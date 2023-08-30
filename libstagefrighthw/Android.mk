@@ -21,9 +21,11 @@ include $(CLEAR_VARS)
 #             Deploy the headers that can be exposed
 #===============================================================================
 
+ifeq ($(BUILD_BROKEN_USES_BUILD_COPY_HEADERS),true)
 LOCAL_COPY_HEADERS_TO   := mm-core/omxcore
 LOCAL_COPY_HEADERS      := QComOMXMetadata.h \
                            QComOMXPlugin.h
+endif
 
 LOCAL_SRC_FILES := \
     QComOMXPlugin.cpp                      \
@@ -43,7 +45,9 @@ LOCAL_HEADER_LIBRARIES := \
         libcutils_headers \
         libutils_headers
 
+ifeq ($(BUILD_BROKEN_USES_BUILD_COPY_HEADERS),true)
 LOCAL_C_INCLUDES:= $(TARGET_OUT_HEADERS)/mm-core/omxcore/
+endif
 
 LOCAL_SHARED_LIBRARIES :=       \
         libutils                \
