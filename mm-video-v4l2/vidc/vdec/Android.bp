@@ -1,0 +1,153 @@
+cc_library_shared {
+    name: "libOmxVdec",
+    vendor: true,
+
+    srcs: [
+        "src/frameparser.cpp",
+        "src/h264_utils.cpp",
+        "src/hevc_utils.cpp",
+        "src/mp4_utils.cpp",
+        "src/omx_vdec_v4l2.cpp",
+        "src/ts_parser.cpp",
+    ],
+
+    cflags: [
+        "-Werror",
+        "-Wno-parentheses",
+        "-D_ANDROID_",
+        "-D_ANDROID_ICS_",
+        "-D_MSM8974_",
+        "-D_QUERY_DISP_RES_",
+        "-DADAPTIVE_PLAYBACK_SUPPORTED",
+        "-DALLOCATE_OUTPUT_NATIVEHANDLE",
+        "-DFLEXYUV_SUPPORTED",
+        "-DMAX_RES_1080P",
+        "-DMAX_RES_1080P_EBI",
+        "-DPROCESS_EXTRADATA_IN_OUTPUT_PORT",
+        "-DUSE_ION",
+    ] + select(soong_config_variable("ANDROID", "target_board_platform"), {
+        "msm8996": [
+            "-D_UBWC_",
+            "-DMAX_H264_LEVEL_52",
+        ],
+        "msm8953": [
+            "-D_UBWC_",
+            "-DMAX_H264_LEVEL_51",
+            "-DHEVC_PROFILE_HDR10_NOT_SUPPORTED",
+        ],
+        "msm8998": [
+            "-D_UBWC_",
+            "-DMAX_H264_LEVEL_52",
+        ],
+        "sdm660": [
+            "-D_UBWC_",
+            "-DMAX_H264_LEVEL_51",
+        ],
+        "apq8098_latv": [
+            "-D_UBWC_",
+            "-DMAX_H264_LEVEL_52",
+        ],
+        "msm8937": [
+            "-DMAX_H264_LEVEL_52",
+            "-DHEVC_PROFILE_HDR10_NOT_SUPPORTED",
+        ],
+        "msm8909": [
+            "-DHEVC_PROFILE_HDR10_NOT_SUPPORTED",
+        ],
+        default: [],
+    }),
+
+
+    header_libs: [
+        "display_headers",
+        "libc2dcolorconvert_headers",
+        "libnativebase_headers",
+        "libomxcommon_headers",
+        "libomxcore_headers",
+        "libomxvdec_headers",
+        "libutils_headers",
+        "media_plugin_headers",
+        "qti_kernel_headers",
+    ],
+	
+    include_dirs: [
+        "system/memory/libion/include",
+        "system/memory/libion/kernel-headers",
+    ],
+
+    shared_libs: [
+        "libcutils",
+        "libion",
+        "liblog",
+        "libqdMetaData",
+        "libqdutils",
+    ],
+
+    static_libs: [
+        "libOmxVidcCommon",
+    ],
+}
+
+cc_library_shared {
+    name: "libOmxSwVdec",
+    vendor: true,
+
+    srcs: [
+        "src/omx_swvdec.cpp",
+        "src/omx_swvdec_utils.cpp",
+    ],
+
+    cflags: [
+        "-Wno-parentheses",
+        "-D_ANDROID_",
+        "-D_ANDROID_ICS_",
+        "-D_MSM8974_",
+        "-D_QUERY_DISP_RES_",
+        "-DADAPTIVE_PLAYBACK_SUPPORTED",
+        "-DALLOCATE_OUTPUT_NATIVEHANDLE",
+        "-DFLEXYUV_SUPPORTED",
+        "-DMAX_RES_1080P",
+        "-DMAX_RES_1080P_EBI",
+        "-DPROCESS_EXTRADATA_IN_OUTPUT_PORT",
+        "-DUSE_ION",
+    ] + select(soong_config_variable("ANDROID", "target_board_platform"), {
+        "msm8937": [
+            "-DMAX_H264_LEVEL_52",
+            "-DHEVC_PROFILE_HDR10_NOT_SUPPORTED",
+        ],
+        "msm8909": [
+            "-DHEVC_PROFILE_HDR10_NOT_SUPPORTED",
+        ],
+        default: [],
+    }),
+
+    header_libs: [
+        "display_headers",
+        "libc2dcolorconvert_headers",
+        "libnativebase_headers",
+        "libomxcommon_headers",
+        "libomxcore_headers",
+        "libomxvdec_headers",
+        "libutils_headers",
+        "media_plugin_headers",
+        "qti_kernel_headers",
+    ],
+	
+    include_dirs: [
+        "system/memory/libion/include",
+        "system/memory/libion/kernel-headers",
+    ],
+
+    shared_libs: [
+        "libcutils",
+        "libion",
+        "liblog",
+    ],
+
+}
+
+cc_library_headers {
+    name: "libomxvdec_headers",
+    export_include_dirs: ["inc"],
+    vendor: true,
+}
