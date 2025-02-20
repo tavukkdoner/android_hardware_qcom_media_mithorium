@@ -32,8 +32,6 @@ cc_library_shared {
     ],
 
     shared_libs: [
-        "liblog",
-        "libdl",
         "libcutils",
     ],
 }
@@ -74,8 +72,6 @@ cc_library_shared {
     ],
 
     shared_libs: [
-        "liblog",
-        "libdl",
         "libcutils",
     ],
 }
