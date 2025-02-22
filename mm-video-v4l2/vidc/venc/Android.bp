@@ -46,6 +46,13 @@ cc_library_shared {
             "-D_VQZIP_",
             "-DMAX_H264_LEVEL_52",
         ],
+        "msm8909": [
+            "-D_MSM8226_",
+        ],
+        "msm8937": [
+            "-D_DISABLE_TEMPORAL_LAYER_",
+            "-DMAX_H264_LEVEL_52",
+        ],
         default: [],
     }),
 
@@ -58,6 +65,11 @@ cc_library_shared {
         "libstagefrighthw_headers",
         "media_plugin_headers",
         "qti_kernel_headers",
+    ],
+	
+    include_dirs: [
+        "system/memory/libion/include",
+        "system/memory/libion/kernel-headers",
     ],
 
     shared_libs: [
@@ -122,6 +134,11 @@ cc_library_shared {
         "liblog",
         "libqdMetaData",
         "libMpeg4SwEncoder",
+    ],
+	
+    include_dirs: [
+        "system/memory/libion/include",
+        "system/memory/libion/kernel-headers",
     ],
 
     static_libs: [
