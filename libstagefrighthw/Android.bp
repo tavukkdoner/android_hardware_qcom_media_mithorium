@@ -19,7 +19,7 @@ cc_library_shared {
     vendor: true,
 
     srcs: [
-        "QComOMXPlugin.cpp"
+        "QComOMXPlugin.cpp",
     ],
 
     header_libs: [
